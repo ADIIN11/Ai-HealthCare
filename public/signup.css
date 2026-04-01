@@ -24,6 +24,11 @@ body {
     justify-content: center;
     padding: 20px;
 }
+.header-logo {
+    width: 4.5rem;
+    border-radius: 8px;
+    object-fit: cover;
+}
 
 .signup-container {
     width: 100%;

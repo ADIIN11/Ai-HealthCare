@@ -3,11 +3,13 @@ const router = express.Router()
 
 const path = require('path')
 
+const {
+  askAi
+} = require('../controllers/authController.js')
+
 
 router.get("/",(req, res) => {
-  res.sendFile(path.join(__dirname, "../public/chatbot.html"))
+  res.sendFile(path.join(__dirname, "../public/calendar.html"))
 })
-
-router.get("/ask",)
 
 module.exports = router;

@@ -25,6 +25,12 @@ body {
     padding: 20px;
 }
 
+.header-logo {
+    width: 4.5rem;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
 .login-container {
     width: 100%;
     max-width: 420px;

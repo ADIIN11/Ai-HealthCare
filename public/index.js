@@ -1,66 +1,157 @@
-// 1. SIMULATED SIGN-IN VALUE
-// Change this to true to see the buttons disappear and name appear
-let userSignedIn = false; 
+// --- CONFIG & STATE ---
+let userSignedIn = false; // Change to true to test login state
+let totalWater = 0;
+const waterGoal = 2.5; 
+let totalCalories = 0;
+const calorieGoal = 2000;
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. DOM Elements ---
+    initUI();
+    startVitalSim();
+});
+
+// --- UI NAVIGATION & AUTH ---
+function initUI() {
     const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
-    const authSection = document.getElementById('authSection');
-    const userSection = document.getElementById('userSection');
-    const cards = document.querySelectorAll('.glass-card');
-    const navLinks = document.querySelectorAll('.nav-links li');
+    const authSec = document.getElementById('authSection');
+    const userSec = document.getElementById('userSection');
 
-    // --- 2. Auth Toggle Logic ---
-    // Ensure the elements exist before trying to modify them
-    if (authSection && userSection) {
-        if (userSignedIn) {
-            authSection.classList.add('hidden');
-            userSection.classList.remove('hidden');
-        } else {
-            authSection.classList.remove('hidden');
-            userSection.classList.add('hidden');
-        }
-    }
-
-    // --- 3. Sidebar Toggle Logic ---
-    function toggleMenu() {
-        // Double check elements exist to prevent errors
-        if(sidebar && overlay) {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-    }
-
-    // Attach listeners exactly ONCE
-    if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
-    if (overlay) overlay.addEventListener('click', toggleMenu);
-
-    // --- 4. Hover Effect for Glass Cards ---
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'scale(1.02)';
-            card.style.transition = '0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'scale(1)';
-        });
+    menuBtn.addEventListener('click', () => {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
     });
 
-    // --- 5. Mobile Navigation Behavior ---
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Close sidebar if it's open
-            if (sidebar && sidebar.classList.contains('active')) {
-                toggleMenu();
-            }
-
-            // UI update for active state
-            navLinks.forEach(l => l.classList.remove('active-nav'));
-            link.classList.add('active-nav');
-        });
+    overlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
     });
-});
+
+    if (userSignedIn) {
+        authSec.classList.add('hidden');
+        userSec.classList.remove('hidden');
+    }
+}
+
+function showSection(section) {
+    document.getElementById('dashboard-section').classList.toggle('hidden', section !== 'dashboard');
+    document.getElementById('chat-section').classList.toggle('hidden', section !== 'chat');
+    document.getElementById('sidebar').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+}
+
+// --- ADD WATER FUNCTION ---
+function addWater() {
+    const qty = parseFloat(document.getElementById('bottleCount').value);
+    const size = parseFloat(document.getElementById('bottleSize').value);
+    
+    if (qty > 0) {
+        totalWater += (qty * size);
+        const percent = Math.min((totalWater / waterGoal) * 100, 100);
+        
+        document.getElementById('waterDisplay').innerText = `You've consumed ${totalWater.toFixed(2)}L today.`;
+        document.getElementById('waterProgress').style.width = percent + "%";
+        document.getElementById('waterStatus').innerText = `Min Hydration: ${percent.toFixed(0)}% fulfilled`;
+    }
+}
+
+// --- ADD CALORIES FUNCTION ---
+function addCalories() {
+    const input = document.getElementById('calInput');
+    const val = parseFloat(input.value);
+
+    if (val > 0) {
+        totalCalories += val;
+        const percent = Math.min((totalCalories / calorieGoal) * 100, 100);
+        
+        document.getElementById('calDisplay').innerHTML = `${totalCalories} <small>/ ${calorieGoal} kcal</small>`;
+        document.getElementById('calProgress').style.width = percent + "%";
+        document.getElementById('calStatus').innerText = `${percent.toFixed(0)}% of min requirement fulfilled`;
+        input.value = '';
+    }
+}
+
+// --- MOCK VITALS ---
+function startVitalSim() {
+    setInterval(() => {
+        const hr = Math.floor(Math.random() * (90 - 65 + 1)) + 65;
+        const sys = Math.floor(Math.random() * (130 - 110 + 1)) + 110;
+        const dia = Math.floor(Math.random() * (85 - 75 + 1)) + 75;
+
+        document.getElementById('heartRate').innerHTML = `${hr} <small>bpm</small>`;
+        document.getElementById('bloodPressure').innerHTML = `${sys}/${dia} <small>mmHg</small>`;
+    }, 3000);
+}
+
+// --- AI CHAT LOGIC ---
+async function askAI() {
+    const input = document.getElementById('aiInput');
+    const chatBox = document.getElementById('chatBox');
+    const query = input.value.trim();
+
+    if (!query) return;
+
+    // Show User Message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user-msg';
+    userMsg.innerText = query;
+    chatBox.appendChild(userMsg);
+    input.value = '';
+
+    // Auth Check
+    if (!userSignedIn) {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg ai-msg';
+        botMsg.innerText = "Please sign in to access the AI Health Assistant.";
+        chatBox.appendChild(botMsg);
+        return;
+    }
+
+    // Call Backend
+    try {
+        const response = await fetch(`/ChatBot/Ask?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg ai-msg';
+        botMsg.innerText = data.answer || "I'm processing your request.";
+        chatBox.appendChild(botMsg);
+    } catch (e) {
+        // Mock response if backend is offline
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg ai-msg';
+        botMsg.innerText = "Connecting to AI... (Check console for mock GET status)";
+        chatBox.appendChild(botMsg);
+        console.log(`GET Request sent to: /ChatBot/Ask?q=${query}`);
+    }
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function askAI() {
+    const input = document.getElementById('aiInput');
+    const chatBox = document.getElementById('chatBox');
+    const val = input.value.trim();
+
+    if (val === "") return;
+
+    // Create User Message
+    const userDiv = document.createElement('div');
+    userDiv.className = 'msg user-msg';
+    userDiv.innerText = val;
+    chatBox.appendChild(userDiv);
+
+    input.value = '';
+
+    // Scroll to bottom
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Simulate AI response (Replace with your actual fetch logic)
+    setTimeout(() => {
+        const aiDiv = document.createElement('div');
+        aiDiv.className = 'msg ai-msg';
+        aiDiv.innerText = "I'm analyzing that for you. Please make sure to consult a doctor for a definitive diagnosis.";
+        chatBox.appendChild(aiDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
+}
