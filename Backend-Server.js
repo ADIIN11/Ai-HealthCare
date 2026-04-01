@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO_DB_URL).then(()=>console.log("MongoDB Connect
 
 
 
-// const authRoutes=require("./routes/authRoutes")
+const authRoutes=require("./routes/authRoutes")
 const commonRoutes=require("./routes/commonRoutes")
 // const profileRoutes=require("./routes/profileRoutes")
 // const categoryRoutes=require("./routes/productRoutes")
@@ -27,6 +27,7 @@ app.use(express.json())
 
 const PORT = process.env.PORT
 
+app.use("/Auth",authRoutes)
 app.use("",commonRoutes)
 
 
