@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Stellar Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/chatbot.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar Navigation (Same as Dashboard) -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo-box">
+                <img src="/assets/logo.jpeg" alt="Logo" class="header-logo"> 
+            </div>
+            <span>Ai-HealthCare</span>
+        </div>
+        <ul class="nav-links">
+            <li onclick="window.location.href='/'"><i class="fa-solid fa-grip"></i> Overview</li>
+            <li class="active-nav"><i class="fa-solid fa-comment-dots"></i> AI Assistant</li>
+            <li><i class="fa-solid fa-user-doctor"></i> My Doctors</li>
+            <li><i class="fa-solid fa-file-medical"></i> Lab Results</li>
+            <li><i class="fa-solid fa-gear"></i> Settings</li>
+        </ul>
+        <div class="sidebar-footer">
+            <p class="membership-status">Pro Member</p>
+            <p class="expiry-notice">Plan expires in 12 days</p>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="menu-trigger" id="menuBtn">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </div>
+                <img src="/assets/logo.jpeg" alt="Logo" class="header-logo">
+            </div>
+            
+            <div id="authSection" class="auth-btns-container">
+                <button class="btn-signin" onclick="window.location.href='/Auth/Sign_In';">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='/Auth/Sign_Up';">Sign Up</button>
+            </div>
+
+            <div id="userSection" class="user-info hidden">
+                <p class="current-date">AI Assistant</p>
+                <h4 class="user-greeting">Online Now</h4>
+            </div>
+        </header>
+
+        <!-- CHAT INTERFACE -->
+        <div class="chat-container glass-card">
+            <div class="chat-messages" id="chatMessages">
+                <!-- Initial Bot Message -->
+                <div class="message bot-message">
+                    <div class="msg-icon"><i class="fa-solid fa-robot"></i></div>
+                    <div class="msg-text">Hello! I am your AI Health Assistant. How can I help you today?</div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="userInput" placeholder="Type your health concern here...">
+                <button title="chat-send-btn" id="sendBtn" class="chat-send-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/chatbot.js"></script>
+</body>
+</html>

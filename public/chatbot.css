@@ -437,3 +437,117 @@ header {
 .hidden {
     display: none !important;
 }
+
+/* --- CHAT INTERFACE STYLES --- */
+
+.chat-container {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 0 !important; /* Override glass-card padding */
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.message {
+    display: flex;
+    gap: 12px;
+    max-width: 85%;
+    align-items: flex-start;
+}
+
+.bot-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.msg-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bot-message .msg-icon {
+    background: var(--midnight-academy);
+    color: var(--sky-blue);
+}
+
+.user-message .msg-icon {
+    background: var(--cool-sky);
+    color: white;
+}
+
+.msg-text {
+    padding: 12px 16px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.bot-message .msg-text {
+    background: var(--bright-snow);
+    color: var(--midnight-academy);
+    border-top-left-radius: 2px;
+}
+
+.user-message .msg-text {
+    background: var(--cool-sky);
+    color: white;
+    border-top-right-radius: 2px;
+}
+
+/* Input Area */
+.chat-input-area {
+    padding: 20px;
+    background: white;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.chat-input-area input {
+    flex-grow: 1;
+    border: 1px solid #eee;
+    padding: 12px 15px;
+    border-radius: 12px;
+    outline: none;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.chat-input-area input:focus {
+    border-color: var(--cool-sky);
+}
+
+.chat-send-btn {
+    background: var(--midnight-academy);
+    color: white;
+    border: none;
+    width: 45px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.chat-send-btn:hover {
+    background: var(--cool-sky);
+    transform: scale(1.05);
+}
