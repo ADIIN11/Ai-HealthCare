@@ -62,6 +62,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     // --- BACKEND SUBMISSION ---
 
     // Prepare payload for the database
+    
     let userData = {
         username: username.value.trim(),
         email: email.value.trim(),
@@ -71,8 +72,10 @@ document.getElementById('signupForm').addEventListener('submit', async function(
         verification: false, 
         profileImg: null,
         profileImgPubId: null,
+        reviewsWritten:[],
         address: null,
-        role: "customerAccount"
+        role: "customerAccount",
+        reviewsWritten:null
     };
 
     try {
@@ -97,7 +100,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
             alert("Account Created Successfully! Redirecting to login...");
             console.log("Account Created Successfully");
             document.getElementById('signupForm').reset();
-            window.location.href = "login.html"; // Redirect user
+            window.location.href = "/Auth/Sign_In"; // Redirect user
         }
 
     } catch (err) {
