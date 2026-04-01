@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
@@ -22,8 +23,14 @@
             <span>Ai-HealthCare</span>
         </div>
         <ul class="nav-links">
-            <li class="active-nav"><i class="fa-solid fa-grip"></i> Overview</li>
-            <li><i class="fa-solid fa-comment-dots"></i> AI Assistant</li>
+            <div onclick="window.location.href='/';">
+                <li class="active-nav"><i class="fa-solid fa-grip"></i> Overview</li>
+            </div>
+            
+            <div onclick="window.location.href='/ChatBot';">
+                <li><i class="fa-solid fa-comment-dots" ></i> AI Assistant</li>
+            </div>
+            
             <li><i class="fa-solid fa-user-doctor"></i> My Doctors</li>
             <li><i class="fa-solid fa-file-medical"></i> Lab Results</li>
             <li><i class="fa-solid fa-gear"></i> Settings</li>

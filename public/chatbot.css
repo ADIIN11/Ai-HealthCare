@@ -1,4 +1,445 @@
+:root {
+    --cool-sky: #5aa9e6;
+    --sky-blue: #7fc8f8;
+    --bright-snow: #f9f9f9;
+    --royal-gold: #ffe45e;
+    --rose-kiss: #ff6392;
+    --midnight-academy: #11224d;
+    --glass-white: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bright-snow);
+    /* Subtle background texture using your theme colors */
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(127, 200, 248, 0.15) 0%, transparent 25%),
+        radial-gradient(circle at 100% 100%, rgba(255, 99, 146, 0.05) 0%, transparent 25%);
+    color: var(--midnight-academy);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- SIDEBAR & LOGO --- */
+.sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--midnight-academy) 0%, #1a3a8a 100%);
+    color: white;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    padding: 2rem 1.5rem;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 10px 0 30px rgba(17, 34, 77, 0.3);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+}
+
+.logo-box img {
+    width: 4.5rem;
+    background: var(--white);
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    padding: 12px 18px;
+    margin: 12px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+}
+
+.nav-links li i {
+    color: var(--sky-blue);
+    font-size: 1.1rem;
+}
+
+.nav-links li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--royal-gold);
+}
+
+.nav-links li.active-nav {
+    background: var(--cool-sky);
+    color: white;
+    box-shadow: 0 10px 20px rgba(90, 169, 230, 0.3);
+}
+
+.nav-links li.active-nav i {
+    color: var(--royal-gold);
+}
+
+.sidebar-footer {
+    position: absolute;
+    bottom: 30px;
+    width: calc(100% - 3rem);
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+}
+
+.membership-status {
+    font-size: 0.8rem;
+    color: var(--royal-gold);
+    font-weight: 600;
+}
+
+.expiry-notice {
+    font-size: 0.7rem;
+    opacity: 0.6;
+}
+
+/* --- HEADER --- */
+.container {
+    padding: 25px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-logo {
+    width: 4.5rem;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.menu-trigger {
+    width: 45px;
+    height: 45px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    color: var(--midnight-academy);
+    font-size: 1.2rem;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.current-date {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.user-greeting {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* --- AI CHAT CARD --- */
+.ai-chat-card {
+    background: var(--midnight-academy);
+    padding: 20px;
+    border-radius: 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 4px solid var(--royal-gold);
+    box-shadow: 0 10px 20px rgba(17, 34, 77, 0.15);
+}
+
+.ai-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ai-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(90, 169, 230, 0.2);
+    border: 1px solid var(--cool-sky);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--sky-blue);
+}
+
+.ai-chat-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.ai-chat-card p {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.chat-trigger-btn {
+    background: var(--royal-gold);
+    color: var(--midnight-academy);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.chat-trigger-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 228, 94, 0.3);
+}
+
+/* --- HERO CARD --- */
+.hero-card {
+    background: linear-gradient(135deg, var(--cool-sky) 0%, var(--sky-blue) 100%);
+    padding: 25px;
+    border-radius: 25px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.hero-card h1 { font-size: 1.5rem; margin-bottom: 8px; }
+.hero-card p { font-size: 0.85rem; opacity: 0.9; font-weight: 300; }
+
+.progress-bar-bg {
+    margin-top: 15px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--royal-gold);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 228, 94, 0.5);
+}
+
+/* --- VITALS --- */
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.glass-card {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.glass-card.vital { border-bottom: 4px solid var(--rose-kiss); }
+.glass-card.goal { border-bottom: 4px solid var(--royal-gold); }
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.vital .icon-box { background: rgba(255, 99, 146, 0.1); color: var(--rose-kiss); }
+.goal .icon-box { background: rgba(255, 228, 94, 0.15); color: #c9a500; }
+
+.metric-value { font-size: 1.4rem; font-weight: 700; }
+.metric-value small { font-size: 0.8rem; color: #888; margin-left: 2px; }
+.metric-label { font-size: 0.75rem; color: #999; font-weight: 500; }
+
+/* --- APPOINTMENTS --- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 { font-size: 1.1rem; }
+.details-link { color: var(--cool-sky); font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+
+.apt-card {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.apt-card:hover {
+    border-color: var(--sky-blue);
+    transform: translateX(5px);
+}
+
+.doctor-thumb {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.apt-info { flex-grow: 1; }
+.apt-info h4 { font-size: 0.95rem; }
+.apt-info p { font-size: 0.75rem; color: #888; }
+
+.badge {
+    background: var(--royal-gold);
+    color: var(--midnight-academy);
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+.badge.dentist-badge { background: var(--sky-blue); color: white; }
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--bright-snow);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cool-sky);
+    cursor: pointer;
+}
+
+/* --- SOS BUTTON --- */
+.fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: var(--rose-kiss);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    box-shadow: 0 10px 25px rgba(255, 99, 146, 0.4);
+    cursor: pointer;
+    z-index: 900;
+    border: 4px solid var(--white);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 34, 77, 0.3);
+    backdrop-filter: blur(5px);
+    display: none;
+    z-index: 999;
+}
+
+.overlay.active { display: block; }
+
+/* Auth Buttons Styling */
+.auth-btns-container {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-signin {
+    background: transparent;
+    border: 2px solid var(--cool-sky);
+    color: var(--cool-sky);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-signup {
+    background: var(--midnight-academy);
+    border: 2px solid var(--midnight-academy);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-signup:hover {
+    background: var(--cool-sky);
+    border-color: var(--cool-sky);
+}
+
+.btn-signin:hover {
+    background: var(--sky-blue);
+    color: white;
+}
+
+/* Helper class to hide elements */
+.hidden {
+    display: none !important;
+}
+
 /* --- CHAT INTERFACE STYLES --- */
+
 .chat-container {
     height: 70vh;
     display: flex;
