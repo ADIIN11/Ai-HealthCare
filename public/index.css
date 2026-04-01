@@ -1,0 +1,385 @@
+:root {
+    --cool-sky: #5aa9e6;
+    --sky-blue: #7fc8f8;
+    --bright-snow: #f9f9f9;
+    --royal-gold: #ffe45e;
+    --rose-kiss: #ff6392;
+    --midnight-academy: #11224d;
+    --glass-white: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bright-snow);
+    background-image: radial-gradient(circle at 10% 20%, rgba(127, 200, 248, 0.1) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(255, 99, 146, 0.05) 0%, transparent 20%);
+    color: var(--midnight-academy);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* --- SIDEBAR --- */
+
+.sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--midnight-academy) 0%, #1a3a8a 100%);
+    color: white;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    padding: 2rem 1.5rem;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 10px 0 30px rgba(17, 34, 77, 0.3);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--sky-blue);
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    padding: 12px 18px;
+    margin: 12px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 300;
+}
+
+.nav-links li i {
+    color: var(--royal-gold);
+    font-size: 1.2rem;
+}
+
+.nav-links li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(10px);
+    color: var(--sky-blue);
+}
+
+.nav-links li.active-nav {
+    background: var(--cool-sky);
+    color: white;
+    box-shadow: 0 10px 20px rgba(90, 169, 230, 0.3);
+}
+
+.sidebar-footer {
+    margin-top: 100px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+}
+
+.membership-status {
+    font-size: 0.8rem;
+    color: var(--sky-blue);
+}
+
+.expiry-notice {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+
+/* --- MAIN INTERFACE --- */
+
+.container {
+    padding: 25px;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: 0.4s;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.current-date {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.user-greeting {
+    color: var(--midnight-academy);
+}
+
+.menu-trigger {
+    width: 45px;
+    height: 45px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    color: var(--midnight-academy);
+    font-size: 1.2rem;
+}
+
+
+/* Hero Banner Gradient */
+
+.hero-card {
+    background: linear-gradient(135deg, var(--midnight-academy) 0%, var(--cool-sky) 100%);
+    padding: 30px;
+    border-radius: 30px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(90, 169, 230, 0.3);
+    margin-bottom: 30px;
+}
+
+.hero-card::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: var(--sky-blue);
+    border-radius: 50%;
+    opacity: 0.2;
+}
+
+.hero-card h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.hero-card p {
+    opacity: 0.9;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+.progress-bar-bg {
+    margin-top: 15px;
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--royal-gold);
+    border-radius: 10px;
+}
+
+
+/* Metric Grid */
+
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.glass-card {
+    background: var(--glass-white);
+    padding: 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+.glass-card.vital {
+    border-bottom: 4px solid var(--rose-kiss);
+}
+
+.glass-card.goal {
+    border-bottom: 4px solid var(--royal-gold);
+}
+
+.icon-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.glass-card.vital .icon-box {
+    background: rgba(255, 99, 146, 0.1);
+    color: var(--rose-kiss);
+}
+
+.glass-card.goal .icon-box {
+    background: rgba(255, 228, 94, 0.2);
+    color: #d4ac0d;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--midnight-academy);
+}
+
+.metric-value small {
+    font-size: 0.8rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+
+/* Appointments */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.details-link {
+    color: var(--cool-sky);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.apt-card {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.apt-card:hover {
+    border-color: var(--sky-blue);
+    transform: translateY(-5px);
+}
+
+.doctor-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: var(--sky-blue);
+    object-fit: cover;
+    border: 3px solid var(--bright-snow);
+}
+
+.apt-info {
+    flex-grow: 1;
+}
+
+.apt-info h4 {
+    margin-top: 5px;
+}
+
+.apt-info p {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.badge {
+    background: var(--royal-gold);
+    color: var(--midnight-academy);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge.dentist-badge {
+    background: var(--sky-blue);
+    color: white;
+}
+
+.action-btn {
+    width: 45px;
+    height: 45px;
+    background: var(--bright-snow);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cool-sky);
+    cursor: pointer;
+}
+
+
+/* Floating Action Button */
+
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background: var(--rose-kiss);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 10px 25px rgba(255, 99, 146, 0.4);
+    cursor: pointer;
+    z-index: 900;
+    border: 4px solid var(--bright-snow);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 34, 77, 0.4);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 999;
+}
+
+.overlay.active {
+    display: block;
+}
