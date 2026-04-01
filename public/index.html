@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Health AI</title>
+    <!-- External Fonts and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hand-holding-medical"></i>
+            <span>NovaHealth</span>
+        </div>
+        <ul class="nav-links">
+            <li class="active-nav"><i class="fa-solid fa-grip"></i> Overview</li>
+            <li><i class="fa-solid fa-user-doctor"></i> My Doctors</li>
+            <li><i class="fa-solid fa-droplet"></i> Blood Tests</li>
+            <li><i class="fa-solid fa-flask-vial"></i> Lab Results</li>
+            <li><i class="fa-solid fa-shield-heart"></i> Insurance</li>
+            <li><i class="fa-solid fa-gear"></i> Settings</li>
+        </ul>
+        <div class="sidebar-footer">
+            <p class="membership-status">Pro Member</p>
+            <p class="expiry-notice">Plan expires in 12 days</p>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <div class="menu-trigger" id="menuBtn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+            <div class="user-info">
+                <p class="current-date">Monday, 24 May</p>
+                <h4 class="user-greeting">Hi, Isabella!</h4>
+            </div>
+        </header>
+
+        <!-- Progress Card -->
+        <section class="hero-card">
+            <h1>Stay Hydrated!</h1>
+            <p>You've drank 1.2L of water today. Reach 2.5L to hit your goal.</p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" style="width: 48%;"></div>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h3>Live Vitals</h3>
+            <span class="details-link">Details</span>
+        </div>
+
+        <!-- Vital Statistics -->
+        <div class="stats-row">
+            <div class="glass-card vital">
+                <div class="icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="metric-value">112 <small>bpm</small></span>
+                <span class="metric-label">Heart Rate</span>
+            </div>
+            <div class="glass-card goal">
+                <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
+                <span class="metric-value">480 <small>kcal</small></span>
+                <span class="metric-label">Calories Burnt</span>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h3>Appointments</h3>
+        </div>
+
+        <!-- Appointment Cards -->
+        <div class="apt-card">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=100&h=100" alt="Doctor" class="doctor-thumb">
+            <div class="apt-info">
+                <div class="badge">Cardiology</div>
+                <h4>Dr. James Wilson</h4>
+                <p>Today • 14:30 PM</p>
+            </div>
+            <div class="action-btn">
+                <i class="fa-solid fa-video"></i>
+            </div>
+        </div>
+
+        <div class="apt-card">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=100&h=100" alt="Doctor" class="doctor-thumb">
+            <div class="apt-info">
+                <div class="badge dentist-badge">Dentist</div>
+                <h4>Dr. Sofia Reed</h4>
+                <p>28 May • 09:00 AM</p>
+            </div>
+            <div class="action-btn">
+                <i class="fa-solid fa-calendar"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action for SOS -->
+    <div class="fab">
+        <i class="fa-solid fa-phone-medical"></i>
+    </div>
+
+    <!-- Link to JS -->
+    <script src="./index.js"></script>
+</body>
+</html>
