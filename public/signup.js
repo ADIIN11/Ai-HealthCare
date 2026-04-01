@@ -56,6 +56,17 @@ document.getElementById('signupForm').addEventListener('submit', function(e) {
     // Success Action
     if (isValid) {
         alert("Account created successfully! Redirecting to dashboard...");
+        // Inside the 'if (isValid)' block of your signup-script.js
+        const userData = {
+            email: email.value.trim(),
+            username: username.value.trim(),
+            bloodGroup: bloodGroup.value,
+            password: password.value
+        };
+        localStorage.setItem('novaHealthUser', JSON.stringify(userData));
+        alert("Account created successfully!");
+        window.location.href = "login.html";
+
         // window.location.href = "index.html"; // Uncomment to redirect
     }
 });
