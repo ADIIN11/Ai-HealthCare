@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Reports | NovaHealth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./reports.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hand-holding-medical"></i>
+            <span>NovaHealth</span>
+        </div>
+        <ul class="nav-links">
+            <li onclick="location.href='index.html'"><i class="fa-solid fa-grip"></i> Overview</li>
+            <li class="active-nav"><i class="fa-solid fa-file-medical"></i> My Reports</li>
+            <li onclick="location.href='calendar.html'"><i class="fa-solid fa-calendar-days"></i> Calendar</li>
+            <li><i class="fa-solid fa-user-doctor"></i> My Doctors</li>
+            <li><i class="fa-solid fa-gear"></i> Settings</li>
+        </ul>
+        <div class="sidebar-footer">
+            <p class="membership-status">Pro Member</p>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <div class="menu-trigger" id="menuBtn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search reports...">
+            </div>
+        </header>
+
+        <section class="hero-card">
+            <h1>Health Summary</h1>
+            <p>Your overall health score is <strong>84/100</strong>. Based on your last 3 blood tests, your iron levels have improved by 12%.</p>
+            <div class="report-stats">
+                <div class="stat-pill">4 New Reports</div>
+                <div class="stat-pill">2 Pending Lab</div>
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h3>Recent Documents</h3>
+            <div class="filter-btns">
+                <span class="active">All</span>
+                <span>Lab</span>
+                <span>Imaging</span>
+            </div>
+        </div>
+
+        <!-- Report List -->
+        <div class="report-list">
+            
+            <!-- Report Card 1 -->
+            <div class="glass-card report-card">
+                <div class="file-icon blood"><i class="fa-solid fa-droplet"></i></div>
+                <div class="report-info">
+                    <h4>Complete Blood Count</h4>
+                    <p>Apollo Diagnostics • 22 May 2024</p>
+                    <span class="badge status-ready">Ready</span>
+                </div>
+                <div class="report-actions">
+                    <button class="action-btn"><i class="fa-solid fa-download"></i></button>
+                    <button class="action-btn share"><i class="fa-solid fa-share-nodes"></i></button>
+                </div>
+            </div>
+
+            <!-- Report Card 2 -->
+            <div class="glass-card report-card">
+                <div class="file-icon xray"><i class="fa-solid fa-bone"></i></div>
+                <div class="report-info">
+                    <h4>Chest X-Ray (PA View)</h4>
+                    <p>City Scan Center • 15 May 2024</p>
+                    <span class="badge status-ready">Ready</span>
+                </div>
+                <div class="report-actions">
+                    <button class="action-btn"><i class="fa-solid fa-eye"></i></button>
+                    <button class="action-btn"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+
+            <!-- Report Card 3 -->
+            <div class="glass-card report-card">
+                <div class="file-icon heart"><i class="fa-solid fa-heart-pulse"></i></div>
+                <div class="report-info">
+                    <h4>ECG / EKG Report</h4>
+                    <p>Dr. James Wilson • 10 May 2024</p>
+                    <span class="badge status-pending">In Analysis</span>
+                </div>
+                <div class="report-actions">
+                    <button class="action-btn disabled"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Upload FAB -->
+    <div class="fab">
+        <i class="fa-solid fa-file-arrow-up"></i>
+    </div>
+
+    <script src="./reports.js"></script>
+</body>
+</html>
