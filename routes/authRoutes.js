@@ -3,7 +3,7 @@ const router = express.Router()
 const {
   userSingUp,
   userSingIn
-} = require('../controllers/authController')
+} = require('../controllers/authController.js')
 
 const path = require('path')
 

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const {
   tokenGenerator,
-} = require('../services/tokenService')
+} = require('../services/tokenService.js')
 
 
 exports.userSingUp=async (req, res) => {
