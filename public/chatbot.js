@@ -1,4 +1,4 @@
-let userSignedIn = false; // Toggle this to true/false to test
+let userSignedIn = true; // Set to true so you can actually test the bot!
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- SIDEBAR & AUTH LOGIC ---
@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.classList.toggle('active');
     }
 
-    menuBtn.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
+    if(menuBtn) menuBtn.addEventListener('click', toggleMenu);
+    if(overlay) overlay.addEventListener('click', toggleMenu);
 
     if (userSignedIn) {
         authSection?.classList.add('hidden');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         chatMessages.appendChild(msgDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Auto scroll
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Auto scroll to bottom
     }
 
     async function handleChat() {
@@ -57,30 +57,52 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 3. Send GET request to Backend
+        // 3. Send POST request to our new OpenAI Backend
         try {
-            // Show a "typing" state
+            // Show a "typing..." state
             const loadingId = "loading-" + Date.now();
             const loadingDiv = document.createElement('div');
             loadingDiv.id = loadingId;
             loadingDiv.classList.add('message', 'bot-message');
-            loadingDiv.innerHTML = `<div class="msg-text">...</div>`;
+            loadingDiv.innerHTML = `
+                <div class="msg-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="msg-text">Thinking...</div>
+            `;
             chatMessages.appendChild(loadingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            const response = await fetch(`/ChatBot/Ask?q=${encodeURIComponent(query)}`);
-            const data = await response.json(); // Assuming backend returns { "answer": "text" }
+            // Call the Express backend we just built!
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: query })
+            });
 
-            // Remove loading and add actual response
+            const data = await response.json();
+
+            // Remove loading indicator
             document.getElementById(loadingId).remove();
-            addMessage(data.answer, 'bot');
+
+            if (data.reply) {
+                // Add the actual AI response
+                addMessage(data.reply, 'bot');
+            } else {
+                addMessage("Sorry, I received an invalid response from the server.", "bot");
+            }
 
         } catch (error) {
             console.error("Chat Error:", error);
-            // Fallback for demo if your backend isn't live yet:
-            // addMessage("I'm having trouble connecting to the server.", "bot");
+            // Remove loading indicator if it fails
+            const loader = document.getElementById(loadingId);
+            if(loader) loader.remove();
+            
+            addMessage("I'm having trouble connecting to the server right now. Is your backend running?", "bot");
         }
     }
 
+    // Event Listeners for sending messages
     sendBtn?.addEventListener('click', handleChat);
     userInput?.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleChat();

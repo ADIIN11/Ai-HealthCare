@@ -261,3 +261,38 @@ header { display: flex; justify-content: space-between; align-items: center; mar
     background: var(--cool-sky);
     transform: scale(1.05);
 }
+
+/* ... (Existing styles from previous turns) ... */
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-meta {
+    text-align: right;
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    background: var(--cool-sky);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(90, 169, 230, 0.3);
+}
+
+.hidden { display: none !important; }
+
+/* Dashboard Nutrition spacing fix */
+.nutrition-input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}

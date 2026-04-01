@@ -14,7 +14,9 @@ const userSchema=new mongoose.Schema({
     address: Object,
     reviewsWritten:Array,
     role: String,
-    id: Number
+    id: Number,
+    chats:Array,
+    vitals:Array
   },{ versionKey: false })
   
  module.exports = mongoose.models.User ||mongoose.model("User",userSchema,"users")
