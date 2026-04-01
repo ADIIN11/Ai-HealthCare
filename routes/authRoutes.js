@@ -18,9 +18,9 @@ router.get("/Sign_Up", (req, res) => {
 
 
 
-// router.get("/Sign_In", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../public/.html"))
-// })
+router.get("/Sign_In", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/login.html"))
+})
 
 // router.post("/Sign_In", userSingIn)
 

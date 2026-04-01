@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGO_DB_URL).then(()=>console.log("MongoDB Connect
 const authRoutes=require("./routes/authRoutes")
 const commonRoutes=require("./routes/commonRoutes")
 // const profileRoutes=require("./routes/profileRoutes")
-// const categoryRoutes=require("./routes/productRoutes")
+const chatbotRoutes=require("./routes/chatbotRoutes.js")
 // const storeRoutes=require("./routes/storeRoutes")
 
 const app = express();
@@ -29,6 +29,7 @@ const PORT = process.env.PORT
 
 app.use("/Auth",authRoutes)
 app.use("",commonRoutes)
+app.use("/ChatBot",chatbotRoutes)
 
 
 
