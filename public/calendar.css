@@ -22,6 +22,11 @@ body {
     overflow-x: hidden;
 }
 
+.header-logo { 
+    width: 3.5rem; 
+    border-radius: 8px; 
+}
+
 
 /* Sidebar Logic */
 
@@ -320,3 +325,39 @@ header {
     background: rgba(17, 34, 77, 0.2);
     z-index: 999;
 }
+
+/* ... Keep your existing CSS ... */
+
+.hidden { display: none !important; }
+
+.auth-btns-container {
+    display: flex;
+    gap: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--cool-sky);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(90, 169, 230, 0.3);
+}
+
+.user-greeting {
+    font-size: 0.9rem;
+    color: var(--midnight-academy);
+}
+
+.btn-signin { background: transparent; border: 2px solid var(--cool-sky); color: var(--cool-sky); padding: 5px 15px; border-radius: 10px; cursor: pointer; }
+.btn-signup { background: var(--midnight-academy); color: white; border: none; padding: 5px 15px; border-radius: 10px; cursor: pointer; }

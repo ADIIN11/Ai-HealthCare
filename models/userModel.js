@@ -16,7 +16,8 @@ const userSchema=new mongoose.Schema({
     role: String,
     id: Number,
     chats:Array,
-    vitals:Array
+    vitals:Array,
+    reminders:Array
   },{ versionKey: false })
   
  module.exports = mongoose.models.User ||mongoose.model("User",userSchema,"users")
