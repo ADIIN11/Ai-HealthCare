@@ -28,3 +28,27 @@ app.use(express.json())
 const PORT = process.env.PORT
 
 app.use("",commonRoutes)
+
+
+
+app.use(express.static(path.join(__dirname, "public")))
+
+
+app.use((req, res) => {
+  res.status(404).send("Page Not Found")
+})
+
+app.listen(PORT, () => {
+  console.log("server is running")
+  console.log("welcome to Ai-HealthCare")
+  console.log(`Listening on port ${PORT}`)
+})
+
+
+
+
+
+
+
+
+
