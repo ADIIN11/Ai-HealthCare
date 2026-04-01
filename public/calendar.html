@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Calendar | NovaHealth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./calendar.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Add Reminder Modal -->
+    <div class="modal" id="reminderModal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3>Schedule Reminder</h3>
+                <p id="selectedDateText" class="ist-label">IST Timezone</p>
+            </div>
+            
+            <div class="input-field">
+                <label>Reminder Title</label>
+                <input type="text" id="reminderInput" placeholder="e.g. Vitamin Intake">
+            </div>
+
+            <div class="input-field">
+                <label>Select Time (IST)</label>
+                <input type="time" id="timeInput">
+            </div>
+
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="saveReminder()">Set Reminder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-hand-holding-medical"></i>
+            <span>NovaHealth</span>
+        </div>
+        <ul class="nav-links">
+            <li onclick="location.href='index.html'"><i class="fa-solid fa-grip"></i> Overview</li>
+            <li class="active-nav"><i class="fa-solid fa-calendar-days"></i> Calendar</li>
+            <li><i class="fa-solid fa-user-doctor"></i> My Doctors</li>
+            <li><i class="fa-solid fa-gear"></i> Settings</li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <div class="menu-trigger" id="menuBtn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </div>
+            <div class="month-display">
+                <h4 id="currentMonthYear">Month Year</h4>
+            </div>
+        </header>
+
+        <!-- Calendar Card -->
+        <section class="glass-card calendar-container">
+            <div class="cal-nav">
+                <button onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar-grid weekdays">
+                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendarDays">
+                <!-- JS Generated -->
+            </div>
+        </section>
+
+        <div class="section-header">
+            <h3>Health Schedule</h3>
+        </div>
+        
+        <div id="reminderListContainer" class="reminder-list">
+            <div class="empty-state">
+                <i class="fa-solid fa-calendar-day"></i>
+                <p>Select a date to manage IST reminders.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./calendar.js"></script>
+</body>
+</html>
