@@ -6,34 +6,29 @@
     <title>Stellar Health AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <!-- Axios for Auth Logic -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
-<body>//
+<body>
 
     <div class="overlay" id="overlay"></div>
 
-    <!-- Sidebar Navigation -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <!-- LOGO PLACEHOLDER -->
             <div class="logo-box">
-                <img src="/assets/logo.jpeg" alt="Logo" class="header-logo"> 
+                <img src="/assets/logo.jpeg" alt="Logo"> 
             </div>
             <span>Ai-HealthCare</span>
         </div>
         <ul class="nav-links">
-            <div onclick="window.location.href='/';">
-                <li class="active-nav"><i class="fa-solid fa-grip"></i> Overview</li>
-            </div>
-            
-            <div onclick="window.location.href='/ChatBot';">
-                <li><i class="fa-solid fa-comment-dots" ></i> AI Assistant</li>
-            </div>
-            
+            <li class="active-nav" onclick="showSection('dashboard')"><i class="fa-solid fa-grip"></i> Overview</li>
+            <li onclick="showSection('chat')"><i class="fa-solid fa-comment-dots"></i> AI Assistant</li>
+            <li onclick="window.location.href='/Calendar';"><i class="fa-solid fa-calendar-days"></i> Calendar</li>
             <li><i class="fa-solid fa-user-doctor"></i> My Doctors</li>
-            <li><i class="fa-solid fa-file-medical"></i> Lab Results</li>
             <li><i class="fa-solid fa-gear"></i> Settings</li>
+            <!-- Sign Out option appears if logged in -->
+            <li id="signOutBtn" class="hidden" onclick="signOut()"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</li>
         </ul>
         <div class="sidebar-footer">
             <p class="membership-status">Pro Member</p>
@@ -41,93 +36,111 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container">
-       <header>
-    <div class="header-left">
-        <div class="menu-trigger" id="menuBtn">
-            <i class="fa-solid fa-bars-staggered"></i>
-        </div>
-        <img src="/assets/logo.jpeg" alt="Logo" class="header-logo">
-    </div>
-    
-    <!-- Auth Buttons (Visible when signed out) -->
-    <div id="authSection" class="auth-btns-container">
-        <button class="btn-signin" onclick="window.location.href='/Auth/Sign_In';">Sign In</button>
-        <button class="btn-signup" onclick="window.location.href='/Auth/Sign_Up';">Sign Up</button>
-    </div>
-
-    <!-- User Info (Visible when signed in) -->
-    <div id="userSection" class="user-info hidden">SSSS
-        <p class="current-date">Monday, 24 May</p>
-        <h4 class="user-greeting">Hi, Isabella!</h4>
-    </div>
-</header>
-        <!-- AI CHAT PROMPT CARD -->
-        <section class="ai-chat-card">
-            <div class="ai-content">
-                <div class="ai-icon">
-                    <i class="fa-solid fa-robot"></i>
+        <header>
+            <div class="header-left">
+                <div class="menu-trigger" id="menuBtn">
+                    <i class="fa-solid fa-bars-staggered"></i>
                 </div>
-                <div>
-                    <h3>AI Health Assistant</h3>
-                    <p>Ask me about your symptoms or pills.</p>
+                <img src="/assets/logo.jpeg" alt="Logo" class="header-logo">
+            </div>
+            
+            <!-- Auth Buttons (Signed Out State) -->
+            <div id="authSection" class="auth-btns-container">
+                <button class="btn-signin" onclick="window.location.href='/Auth/Sign_In';">Sign In</button>
+                <button class="btn-signup" onclick="window.location.href='/Auth/Sign_Up';">Sign Up</button>
+            </div>
+
+            <!-- User Profile (Signed In State) -->
+            <div id="userSection" class="user-info hidden">
+                <div class="profile-meta">
+                    <p class="current-date" id="displayDate">Monday, 24 May</p>
+                    <h4 class="user-greeting">Hi, <span id="userName">User</span>!</h4>
+                </div>
+                <div class="user-avatar" id="userAvatar">U</div>
+            </div>
+        </header>
+
+        <main id="dashboard-section">
+            <!-- AI CHAT PROMPT CARD -->
+            <section class="ai-chat-card">
+                <div class="ai-content">
+                    <div class="ai-icon"><i class="fa-solid fa-robot"></i></div>
+                    <div class="text-group">
+                        <h3>AI Health Assistant</h3>
+                        <p>Ask me about your symptoms or pills.</p>
+                    </div>
+                </div>
+                <button class="chat-trigger-btn" onclick="showSection('chat')">Chat Now</button>
+            </section>
+
+            <!-- Interactive Hydration Card -->
+            <section class="hero-card">
+                <h1>Stay Hydrated!</h1>
+                <p id="waterDisplay">You've consumed 0.00L today.</p>
+                <div class="interactive-row">
+                    <input type="number" id="bottleCount" value="1" min="1" class="qty-input">
+                    <select id="bottleSize" class="size-select">
+                        <option value="0.25">0.25 L</option>
+                        <option value="0.5" selected>0.5 L</option>
+                        <option value="1.0">1.0 L</option>
+                    </select>
+                    <button class="add-btn" onclick="addWater()">Add</button>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="waterProgress" class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <small id="waterStatus">Min Hydration: 0% fulfilled</small>
+            </section>
+
+            <!-- Vitals -->
+            <div class="stats-row">
+                <div class="glass-card vital">
+                    <div class="icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <span class="metric-value" id="heartRate">-- <small>bpm</small></span>
+                    <span class="metric-label">Heart Rate</span>
+                </div>
+                <div class="glass-card vital" style="border-bottom: 4px solid var(--cool-sky);">
+                    <div class="icon-box"><i class="fa-solid fa-gauge-high"></i></div>
+                    <span class="metric-value" id="bloodPressure">--/-- <small>mmHg</small></span>
+                    <span class="metric-label">Blood Pressure</span>
                 </div>
             </div>
-            <button class="chat-trigger-btn" onclick="window.location.href='/ChatBot';">Chat Now</button>
-        </section>
 
-        <!-- Progress Card -->
-        <section class="hero-card">
-            <h1>Stay Hydrated!</h1>
-            <p>You've drank 1.2L of water today. Reach 2.5L to hit your goal.</p>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" style="width: 48%;"></div>
-            </div>
-        </section>
-
-        <div class="section-header">
-            <h3>Live Vitals</h3>
-            <span class="details-link">Details</span>
-        </div>
-
-        <!-- Vital Statistics -->
-        <div class="stats-row">
-            <div class="glass-card vital">
-                <div class="icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
-                <span class="metric-value">112 <small>bpm</small></span>
-                <span class="metric-label">Heart Rate</span>
-            </div>
+            <!-- Calories -->
             <div class="glass-card goal">
-                <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
-                <span class="metric-value">480 <small>kcal</small></span>
-                <span class="metric-label">Calories Burnt</span>
+                <div class="nutrition-input-row">
+                    <div>
+                        <span class="metric-label">Consumed Today</span>
+                        <h2 id="calDisplay">0 <small>/ 2000 kcal</small></h2>
+                    </div>
+                    <div class="interactive-row">
+                        <input type="number" id="calInput" placeholder="kcal" class="qty-input">
+                        <button class="add-btn" onclick="addCalories()">Add</button>
+                    </div>
+                </div>
+                <div class="progress-bar-bg" style="background: rgba(0,0,0,0.05);">
+                    <div id="calProgress" class="progress-bar-fill" style="width: 0%; background: var(--cool-sky);"></div>
+                </div>
             </div>
-        </div>
+        </main>
 
-        <div class="section-header">
-            <h3>Appointments</h3>
-        </div>
-
-        <!-- Appointment Cards -->
-        <div class="apt-card">
-            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=100&h=100" alt="Doctor" class="doctor-thumb">
-            <div class="apt-info">
-                <div class="badge">Cardiology</div>
-                <h4>Dr. James Wilson</h4>
-                <p>Today • 14:30 PM</p>
+        <!-- CHAT SECTION -->
+        <main id="chat-section" class="hidden">
+            <div class="chat-container glass-card">
+                <div class="chat-messages" id="chatBox">
+                    <div class="msg ai-msg">Hello! Please sign in to save your health history.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="aiInput" placeholder="Ask about symptoms...">
+                    <button class="chat-send-btn" onclick="askAI()"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
             </div>
-            <div class="action-btn">
-                <i class="fa-solid fa-video"></i>
-            </div>
-        </div>
+        </main>
     </div>
 
-    <!-- Floating Action for SOS -->
-    <div class="fab">
-        <i class="fa-solid fa-phone-medical"></i>
-    </div>
+    <div class="fab"><i class="fa-solid fa-phone-medical"></i></div>
 
-    <script src="/index.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

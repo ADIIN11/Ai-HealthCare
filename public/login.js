@@ -1,54 +1,85 @@
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+const msgPara = document.getElementById("msg-id");
+const passwordInpt = document.getElementById("password-inpt");
+const nameEmailInpt = document.getElementById("username-email-inpt");
+const captchaInpt = document.getElementById("captcha-inpt");
+const form = document.getElementById("form-id");
 
-    const identifier = document.getElementById('loginIdentifier');
-    const password = document.getElementById('loginPassword');
-    const idError = document.getElementById('identifierError');
-    const passError = document.getElementById('passwordError');
+form.addEventListener("submit", submit);
 
-    // Reset UI
-    idError.innerText = "";
-    passError.innerText = "";
-    identifier.classList.remove('invalid');
-    password.classList.remove('invalid');
+async function submit(event) {
+    event.preventDefault(); // Prevents default form submission
 
-    // 1. Basic Empty Check
-    let hasError = false;
-    if (!identifier.value.trim()) {
-        idError.innerText = "Please enter your Gmail or Username";
-        identifier.classList.add('invalid');
-        hasError = true;
-    }
-    if (!password.value.trim()) {
-        passError.innerText = "Please enter your password";
-        password.classList.add('invalid');
-        hasError = true;
-    }
-    if (hasError) return;
+    // Default style reset
+    msgPara.style.color = "#777";
 
-    // 2. Fetch Data from LocalStorage (Simulated database)
-    const storedUser = JSON.parse(localStorage.getItem('novaHealthUser'));
+    // 1. Basic Validation
+    if (!nameEmailInpt.value || (!passwordInpt.value && !captchaInpt.value)) {
+        msgPara.textContent = "Fill all the boxes";
+        msgPara.style.color = "var(--rose-kiss)";
+        return;
+    } 
+    else if (nameEmailInpt.value && passwordInpt.value && !captchaInpt.value) {
+        msgPara.textContent = "Pls Fill Captcha";
+        msgPara.style.color = "var(--rose-kiss)";
+        return;
+    } 
+    else {
+        let userData = {
+            usernameEmail: nameEmailInpt.value,
+            password: passwordInpt.value,
+        };
 
-    // 3. Validation Logic
-    if (!storedUser) {
-        idError.innerText = "No account found. Please Sign Up first.";
-        identifier.classList.add('invalid');
-    } else {
-        // Check if identifier matches Email or Username
-        const idMatch = (identifier.value.trim() === storedUser.email ||
-            identifier.value.trim() === storedUser.username);
+        try {
+            // 2. Axios Request to Backend
+            const res = await axios.post("/Auth/Sign_In", userData);
 
-        if (!idMatch) {
-            idError.innerText = "Username or Gmail does not exist";
-            identifier.classList.add('invalid');
-        } else if (password.value !== storedUser.password) {
-            // Identifier matches, but password doesn't
-            passError.innerText = "Incorrect password. Please try again.";
-            password.classList.add('invalid');
-        } else {
-            // SUCCESS
-            alert("Login Successful! Welcome to NovaHealth.");
-            window.location.href = "index.html"; // Redirect to Dashboard
+            if (!res.data.exists) {
+                msgPara.textContent = "Account Does Not Exist, Pls Sign-Up";
+                msgPara.style.color = "var(--rose-kiss)";
+                return;
+            } 
+            else if (!res.data.passwordCorrect) {
+                msgPara.textContent = "Password Incorrect";
+                msgPara.style.color = "var(--rose-kiss)";
+                return;
+            } 
+            else {
+                console.log(res.data);
+                
+                // 3. Save Token and Verify
+                localStorage.setItem("token", res.data.token);
+                msgPara.textContent = "Signed In Successfully";
+                msgPara.style.color = "#27ae60"; // Success Green
+
+                verifyToken();
+
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+            }
+            form.reset();
+        } catch (err) {
+            console.error("Error:", err);
+            msgPara.textContent = "Something went wrong, try again";
+            msgPara.style.color = "var(--rose-kiss)";
         }
     }
-});
+}
+
+async function verifyToken() {
+    const token = localStorage.getItem("token");
+    const tokenObj = { token: token };
+
+    try {
+        const res = await axios.post("/Token_Verification", tokenObj);
+        if (res.data.tokenVerified) {
+            const id = res.data.id;
+            localStorage.setItem("currentUserId", id);
+            console.log("Token Verified");
+        } else {
+            console.log("Token expired pls login again");
+        }
+    } catch (err) {
+        console.error("Error:", err);
+    }
+}

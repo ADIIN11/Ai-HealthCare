@@ -17,12 +17,19 @@
 
 body {
     background-color: var(--bright-snow);
-    background-image: radial-gradient(circle at 10% 20%, rgba(127, 200, 248, 0.15) 0%, transparent 25%), radial-gradient(circle at 90% 80%, rgba(255, 99, 146, 0.1) 0%, transparent 25%);
+    background-image: radial-gradient(circle at 10% 20%, rgba(127, 200, 248, 0.15) 0%, transparent 25%), 
+                      radial-gradient(circle at 90% 80%, rgba(255, 99, 146, 0.1) 0%, transparent 25%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+}
+
+.header-logo {
+    width: 3.5rem;
+    border-radius: 8px;
+    object-fit: cover;
 }
 
 .login-container {
@@ -32,7 +39,7 @@ body {
 
 .login-card {
     background: var(--glass-white);
-    padding: 40px;
+    padding: 35px;
     border-radius: 30px;
     box-shadow: 0 20px 40px rgba(17, 34, 77, 0.1);
     backdrop-filter: blur(10px);
@@ -46,21 +53,24 @@ body {
     color: var(--cool-sky);
     font-weight: 700;
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     justify-content: center;
 }
 
 h2 {
     color: var(--midnight-academy);
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
 }
 
 .subtitle {
     color: #777;
     text-align: center;
-    font-size: 0.9rem;
-    margin-bottom: 30px;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+    min-height: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 .input-group {
@@ -69,10 +79,10 @@ h2 {
 
 .input-group label {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--midnight-academy);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .input-group label i {
@@ -82,27 +92,16 @@ h2 {
 
 .input-group input {
     width: 100%;
-    padding: 12px 15px;
-    border-radius: 12px;
-    border: 2px solid #eee;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1.5px solid #eee;
     outline: none;
     transition: 0.3s;
 }
 
 .input-group input:focus {
     border-color: var(--sky-blue);
-}
-
-.input-group input.invalid {
-    border-color: var(--rose-kiss);
-}
-
-.error-msg {
-    color: var(--rose-kiss);
-    font-size: 0.75rem;
-    margin-top: 5px;
-    display: block;
-    min-height: 1rem;
+    background-color: #fff;
 }
 
 .forgot-pass {
@@ -118,24 +117,26 @@ h2 {
 
 .login-btn {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     background: linear-gradient(135deg, var(--midnight-academy) 0%, var(--cool-sky) 100%);
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(90, 169, 230, 0.3);
+    transition: 0.3s;
 }
 
 .login-btn:hover {
     transform: translateY(-2px);
+    opacity: 0.95;
 }
 
 .form-footer {
     text-align: center;
     margin-top: 25px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #777;
 }
 
@@ -144,3 +145,4 @@ h2 {
     font-weight: 600;
     text-decoration: none;
 }
+

@@ -6,6 +6,8 @@
     <title>Login | NovaHealth</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Axios Library for Backend Requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/login.css">
 </head>
 <body>
@@ -13,26 +15,31 @@
     <div class="login-container">
         <div class="login-card">
             <div class="brand-section">
-                <i class="fa-solid fa-hand-holding-medical"></i>
-                <span>NovaHealth</span>
+                <img src="/assets/logo.jpeg" alt="Logo" class="header-logo"> 
+                <span>Ai-HealthCare</span>
             </div>
             
             <h2>Welcome Back</h2>
-            <p class="subtitle">Enter your credentials to access your dashboard</p>
+            <!-- Feedback Message Area -->
+            <p id="msg-id" class="subtitle">Enter your credentials to access your dashboard</p>
 
-            <form id="loginForm" novalidate>
+            <form id="form-id" novalidate>
                 <!-- Gmail / Username -->
                 <div class="input-group">
                     <label><i class="fa-solid fa-user-check"></i> Gmail or Username</label>
-                    <input type="text" id="loginIdentifier" placeholder="Email or Username">
-                    <span class="error-msg" id="identifierError"></span>
+                    <input type="text" id="username-email-inpt" placeholder="Email or Username">
                 </div>
 
                 <!-- Password -->
                 <div class="input-group">
                     <label><i class="fa-solid fa-key"></i> Password</label>
-                    <input type="password" id="loginPassword" placeholder="••••••••">
-                    <span class="error-msg" id="passwordError"></span>
+                    <input type="password" id="password-inpt" placeholder="••••••••">
+                </div>
+
+                <!-- Captcha Field -->
+                <div class="input-group">
+                    <label><i class="fa-solid fa-robot"></i> Security Captcha</label>
+                    <input type="text" id="captcha-inpt" placeholder="Enter Captcha Code">
                 </div>
 
                 <div class="forgot-pass">
