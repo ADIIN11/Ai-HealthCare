@@ -1,3 +1,9 @@
+let userSignedIn = false; 
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('menuBtn');
     const sidebar = document.getElementById('sidebar');
@@ -39,4 +45,38 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active-nav');
         });
     });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. SIMULATED SIGN-IN VALUE
+    // Change this to 'true' to see the buttons disappear and name appear
+    
+
+    // 2. Auth Toggle Logic
+    const authSection = document.getElementById('authSection');
+    const userSection = document.getElementById('userSection');
+
+    if (userSignedIn) {
+        authSection.classList.add('hidden');
+        userSection.classList.remove('hidden');
+    } else {
+        authSection.classList.remove('hidden');
+        userSection.classList.add('hidden');
+    }
+
+    // --- Rest of your existing Sidebar logic ---
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    // ... (keep the rest of your code)
 });

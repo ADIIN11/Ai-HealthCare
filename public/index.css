@@ -392,3 +392,48 @@ header {
 }
 
 .overlay.active { display: block; }
+
+/* Auth Buttons Styling */
+.auth-btns-container {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-signin {
+    background: transparent;
+    border: 2px solid var(--cool-sky);
+    color: var(--cool-sky);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-signup {
+    background: var(--midnight-academy);
+    border: 2px solid var(--midnight-academy);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-signup:hover {
+    background: var(--cool-sky);
+    border-color: var(--cool-sky);
+}
+
+.btn-signin:hover {
+    background: var(--sky-blue);
+    color: white;
+}
+
+/* Helper class to hide elements */
+.hidden {
+    display: none !important;
+}
