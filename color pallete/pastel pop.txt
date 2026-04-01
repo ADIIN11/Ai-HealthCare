@@ -1,11 +1,11 @@
 Gemini said
 /* CSS HEX */
 --cool-sky: #5aa9e6ff;
---sky-blue: #7fc8f8ff;
---bright-snow: #f9f9f9ff;
+--sky-blue: #7fc8f8ff; 
+--bright-snow: #f9f9f9ff; -background
 --royal-gold: #ffe45eff;
 --rose-kiss: #ff6392ff;
---midnight-academy: #11224dff;
+--midnight-academy: #11224dff;-dark color
 
 /* CSS HSL */
 --cool-sky: hsla(206, 74%, 63%, 1);
